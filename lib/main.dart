@@ -5,11 +5,11 @@ void main() {
   final exclude = ['Path', 'path', 'expires'];
   final isValid = (List<String> l) => (List<String> i) => i.length == 2 && !l.contains(i[0].trim());
   final create = (List<String> i) => '${i[0].trim()}=${i[1].trim()}';
-  final add = uCompose(uAdd(1), uAdd(3));
-  final cookie = uSplit(',')(cookies)
-      .map(uSplit(';'))
+  final add = U.compose(U.add(1), U.add(3));
+  final cookie = U.split(',')(cookies)
+      .map(U.split(';'))
       .expand((i) => i)
-      .map(uSplit('='))
+      .map(U.split('='))
       .where(isValid(exclude))
       .map(create)
       .toSet()
@@ -17,6 +17,7 @@ void main() {
 
   print(cookie); // XSRF-TOKEN=63511a1a-47d4-4e97-8812-b3e45b365074;SameSite=Lax;JSESSIONID=5236CE7640E028A6BD236623F8223684.worker-
   print(add(2)); // 6
-  print(uCompose(add, uInc)(2)); // 7
-  print(uCompose(add, uDec)(2)); // 5
+
+  var t = U.compose(U.add(2), U.add(2));
+  print(t(2));
 }
