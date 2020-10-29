@@ -1,10 +1,7 @@
-// curried util functions
-final _compose = (Function f, Function g) => (dynamic x) => g(f(x));
-final _split = (String separator) => (String str) => str.split(separator);
-final _add = (int a) => (int b) => a + b;
+final compose = (Function f, Function g) => (dynamic x) => g(f(x));
 
-class U {
-  static final add = _add;
-  static final compose = _compose;
-  static final split = _split;
+extension StringUtils on String {
+  String get kebab => replaceAll(RegExp(r'\s+'), '-').toLowerCase();
+  String get test => replaceAll(RegExp(r'\s+'), '+').toUpperCase();
+  String get hello => 'hello ${this}';
 }
